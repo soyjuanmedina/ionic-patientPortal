@@ -1,6 +1,6 @@
 {
-  "name": "myApp",
-  "app_id": "",
+  "name": "patientportalapp",
+  "app_id": "c666253e",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
