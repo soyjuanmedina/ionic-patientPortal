@@ -8,13 +8,23 @@ import { AlertController } from 'ionic-angular';
 //Services
 import { DatabaseService } from '../../services/service.database';
 
+interface Searchterms {
+  hospitalId: string,
+  payorId: string,
+  departmentId: string,
+  treatmentId: string,
+  doctorId: string,
+  specialtyId: string,
+  visitTypeId: string,
+}
+
 @Component({
   selector: 'app-bookappointments',
   templateUrl: './bookappointments.component.html',
 })
 export class BookappointmentsComponent {
 
-  searchterms: Object = {
+  searchterms: Searchterms = {
     hospitalId: null,
     payorId: null,
     departmentId: null,
