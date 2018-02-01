@@ -64,7 +64,7 @@ export class BookappointmentsComponent {
     }
   }
 
-  searchDoctors() {
+  searchDoctors () {
     var params = {
       payorId: this.searchterms.payorId,
       orgId: this.searchterms.departmentId,
