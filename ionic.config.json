@@ -1,6 +1,12 @@
 {
   "name": "patientportalapp",
   "app_id": "c666253e",
+  "proxies": [
+    {
+      "path": "/patient-portal/rest/resource",
+      "proxyUrl": "http://ukawppwebdmzd.schoen-clinic.co.uk/patient-portal/rest/resource"
+    }
+  ],
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
