@@ -64,7 +64,7 @@ export class BookappointmentsComponent {
   }
 
    checkDepartment(){
-    if (this.searchterms.department == '1LDSSP') {
+     if (this.searchterms.departmentId == '1LDSSP') {
       this.showAlert();
     } else{
       console.log('VEREMOS');
