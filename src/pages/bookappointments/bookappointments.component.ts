@@ -15,13 +15,13 @@ import { DatabaseService } from '../../services/service.database';
 export class BookappointmentsComponent {
 
   searchterms: Object = {
-    hospitalId: '',
-    payorId: '',
-    departmentId: '',
-    treatmentId: '',
-    doctorId: '',
-    specialtyId: '',
-    visitTypeId: '',
+    hospitalId: null,
+    payorId: null,
+    departmentId: null,
+    treatmentId: null,
+    doctorId: null,
+    specialtyId: null,
+    visitTypeId: null,
   };
 
   hospitals: any[];
