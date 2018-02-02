@@ -12,9 +12,7 @@ export class DatabaseService {
   getResource(term: string, params?: Object) {
     let url = `/patient-portal/rest/resource/${term}`;
 
-    
-
-    return this.httpClient.get(url, params)
+    return this.httpClient.get(url, { params: params })
       .map((resp: any) => {
         this.resource = resp.result;
         return this.resource;

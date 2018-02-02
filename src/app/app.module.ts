@@ -14,6 +14,7 @@ import { DatabaseService } from '../services/service.database';
 // Componentes
 import { BookappointmentsComponent } from '../pages/bookappointments/bookappointments.component';
 import { LoginComponent } from '../pages/login/login.component';
+import { FreeslotsComponent } from '../pages/freeslots/freeslots.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,7 +24,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     TabsPage,
     BookappointmentsComponent,
-    LoginComponent
+    LoginComponent,
+    FreeslotsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     TabsPage,
     BookappointmentsComponent,
-    LoginComponent
+    LoginComponent,
+    FreeslotsComponent
   ],
   providers: [
     StatusBar,

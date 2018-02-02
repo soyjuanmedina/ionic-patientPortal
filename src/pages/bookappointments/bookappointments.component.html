@@ -29,7 +29,7 @@
   <ion-list>
     <ion-item>
       <ion-label>Department</ion-label>
-      <ion-select [(ngModel)]=searchterms.departmentId [disabled]="!searchterms.payorId" (ngModelChange)=checkDepartment()>
+      <ion-select [(ngModel)]=searchterms.orgId [disabled]="!searchterms.payorId" (ngModelChange)=checkDepartment()>
         <ion-option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</ion-option>
       </ion-select>
     </ion-item>
@@ -52,7 +52,7 @@
       </ion-select>
     </ion-item>
   </ion-list>
-
+  
   <ion-list>
     <ion-item>
       <ion-label>Visit type</ion-label>
@@ -62,9 +62,27 @@
     </ion-item>
   </ion-list>
 
+  <ion-item>
+    <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="searchterms.date"></ion-datetime>
+  </ion-item>
+
+  <button ion-button block [disabled]="!searchterms.payorId" (click)="searchFreeSlots()">Search</button>
+
+
+  <ion-list>
+    <button ion-item *ngFor="let freeslot of freeslots" (click)="itemSelected(freeslot)">
+      {{ freeslot.date }} | {{ freeslot.hour }}
+    </button>
+  </ion-list>
+
   <pre>
+
+     {{ freeslots }}
   
     {{ searchterms | json }}
+
+    
   
   </pre>
   

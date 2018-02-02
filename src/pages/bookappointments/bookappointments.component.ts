@@ -11,11 +11,13 @@ import { DatabaseService } from '../../services/service.database';
 interface Searchterms {
   hospitalId: string,
   payorId: string,
-  departmentId: string,
+  orgId: string,
   treatmentId: string,
   doctorId: string,
   specialtyId: string,
   visitTypeId: string,
+  schedule: string,
+  date: string,
 }
 
 @Component({
@@ -27,11 +29,13 @@ export class BookappointmentsComponent {
   searchterms: Searchterms = {
     hospitalId: null,
     payorId: null,
-    departmentId: null,
+    orgId: null,
     treatmentId: null,
     doctorId: null,
     specialtyId: null,
     visitTypeId: null,
+    schedule: null,
+    date: '2018-02-02',
   };
 
   hospitals: any[];
@@ -40,6 +44,7 @@ export class BookappointmentsComponent {
   doctors: any[];
   specialties: any[];
   visitTypes: any[];
+  freeslots: any[];
 
   constructor(public _databaseService: DatabaseService,
               public alertCtrl: AlertController) {
@@ -67,7 +72,6 @@ export class BookappointmentsComponent {
      if (this.searchterms.departmentId == '1LDSSP') {
       this.showAlert();
     } else{
-      console.log('VEREMOS');
       this.searchDoctors();
       this.searchvisitType();
       this.searchSpecialties();
@@ -108,6 +112,19 @@ export class BookappointmentsComponent {
     this._databaseService.getResource('specialties', params).subscribe(response => {
       this.specialties = response;
     });
+  }
+
+  searchFreeSlots() {
+    let params = {};
+    for (let param in this.searchterms) { 
+      if (this.searchterms[param])
+        params[param] = this.searchterms[param];
+      }
+
+    this._databaseService.getResource('freeslots', params).subscribe(response => {
+      this.freeslots = response;
+    });
+
   }
 
   showAlert() {
