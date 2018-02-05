@@ -9,7 +9,7 @@ export class DatabaseService {
 
   constructor(public httpClient: HttpClient) { }
 
-  getResource(term: string, params?: Object) {
+  getResource(term: string, params?: any) {
     let url = `/patient-portal/rest/resource/${term}`;
 
     return this.httpClient.get(url, { params: params })

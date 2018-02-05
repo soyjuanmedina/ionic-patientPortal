@@ -69,7 +69,7 @@ export class BookappointmentsComponent {
   }
 
    checkDepartment(){
-     if (this.searchterms.departmentId == '1LDSSP') {
+     if (this.searchterms.orgId == '1LDSSP') {
       this.showAlert();
     } else{
       this.searchDoctors();
@@ -81,7 +81,7 @@ export class BookappointmentsComponent {
   searchDoctors () {
     var params = {
       payorId: this.searchterms.payorId,
-      orgId: this.searchterms.departmentId,
+      orgId: this.searchterms.orgId,
       specialtyId: this.searchterms.specialtyId,
       treatmentId: this.searchterms.treatmentId,
     };
