@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SystemJsNgModuleLoaderConfig } from '@angular/core/src/linker/system_js_ng_module_factory_loader';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 //Alertas
 import { AlertController } from 'ionic-angular';
 
 //Services
 import { DatabaseService } from '../../services/service.database';
+
+//Páginas
+import { FreeslotsComponent } from '../freeslots/freeslots.component';
 
 interface Searchterms {
   hospitalId: string,
@@ -44,10 +48,12 @@ export class BookappointmentsComponent {
   doctors: any[];
   specialties: any[];
   visitTypes: any[];
-  freeslots: any[];
+
 
   constructor(public _databaseService: DatabaseService,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public navCtrl: NavController, 
+              public navParams: NavParams) {
 
     this._databaseService.getResource('hospitals').subscribe(response => {
       this.hospitals = response;
@@ -114,19 +120,6 @@ export class BookappointmentsComponent {
     });
   }
 
-  searchFreeSlots() {
-    let params = {};
-    for (let param in this.searchterms) { 
-      if (this.searchterms[param])
-        params[param] = this.searchterms[param];
-      }
-
-    this._databaseService.getResource('freeslots', params).subscribe(response => {
-      this.freeslots = response;
-    });
-
-  }
-
   showAlert() {
     let confirm = this.alertCtrl.create({
       title: 'Spine protocol',
@@ -147,6 +140,12 @@ export class BookappointmentsComponent {
       ]
     });
     confirm.present();
+  }
+
+  goToFreeSlots(searchterms:Searchterms){
+    console.log(searchterms);
+    this.navCtrl.push(FreeslotsComponent, { searchterms });
+
   }
 
 }

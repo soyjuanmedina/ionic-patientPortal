@@ -1,11 +1,21 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>freeslots</ion-title>
+  <ion-navbar  color="sk">
+    <ion-title>Freeslots</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <h1>freeslots</h1>
+  <h4>Your search</h4>  
+  <ion-list>
+    <ion-item *ngFor="let freeslot of freeslots" (click)="bookFreeslot(freeslot)">
+      <ion-avatar item-start>
+        <img src="assets/imgs/logo.png">
+      </ion-avatar>
+      <h2>{{ freeslot.doctor.name }}</h2>
+      <p>{{ freeslot.date }} | {{ freeslot.hour }}</p>
+      <button ion-button clear item-end>Book</button>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

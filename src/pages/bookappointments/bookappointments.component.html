@@ -1,16 +1,32 @@
 <ion-header>
   <ion-navbar color="sk">
     <ion-title>Book appointments</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openModal()">
+        <div>
+          <ion-icon name='person'></ion-icon>
+          <br>
+          <label>Login</label>
+        </div>
+      </button>
+      <button ion-button icon-only (click)="openModal()">
+        <div>
+          <ion-icon name='create'></ion-icon>
+          <br>
+          <label>Register</label>
+        </div>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   
-  <h1 *ngIf="hospitals?.length == 1">{{hospitals[0].name}}</h1>
+  <h4 *ngIf="hospitals?.length == 1">Hospital: {{hospitals[0].name}}</h4>
   
   <ion-list *ngIf="hospitals?.length > 1">
     <ion-item>
-      <ion-label>Hospital</ion-label>
+      <ion-label  [color]="searchterms.payorId ? 'sk' : ''">Hospital</ion-label>
       <ion-select [(ngModel)]=searchterms.hospitalId>
         <ion-option *ngFor="let hospital of hospitals" [value]="hospital.id">{{ hospital.name }}</ion-option>
       </ion-select>
@@ -19,7 +35,7 @@
 
   <ion-list>
     <ion-item>
-      <ion-label>Source of funding</ion-label>
+      <ion-label [color]="searchterms.payorId ? 'sk' : ''">Source of funding</ion-label>
       <ion-select [(ngModel)]=searchterms.payorId>
         <ion-option *ngFor="let payor of payors" [value]="payor.id">{{ payor.name }}</ion-option>
       </ion-select>
@@ -28,7 +44,7 @@
 
   <ion-list>
     <ion-item>
-      <ion-label>Department</ion-label>
+      <ion-label [color]="searchterms.orgId ? 'sk' : ''">Department</ion-label>
       <ion-select [(ngModel)]=searchterms.orgId [disabled]="!searchterms.payorId" (ngModelChange)=checkDepartment()>
         <ion-option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</ion-option>
       </ion-select>
@@ -37,8 +53,8 @@
 
   <ion-list>
     <ion-item>
-      <ion-label>Consultant</ion-label>
-      <ion-select [(ngModel)]=searchterms.doctorId [disabled]="!searchterms.payorId" (ngModelChange)="searchSpecialties()">
+      <ion-label [color]="searchterms.doctorId ? 'sk' : ''">Consultant</ion-label>
+      <ion-select [(ngModel)]=searchterms.doctorId [disabled]="!searchterms.payorId || !searchterms.orgId" (ngModelChange)="searchSpecialties()">
         <ion-option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.name }}</ion-option>
       </ion-select>
     </ion-item>
@@ -46,8 +62,8 @@
 
   <ion-list>
     <ion-item>
-      <ion-label>Consultants' Specialty</ion-label>
-      <ion-select [(ngModel)]=searchterms.specialtyId [disabled]="!searchterms.payorId" (ngModelChange)="searchDoctors()">
+      <ion-label [color]="searchterms.specialtyId ? 'sk' : ''">Consultants' Specialty</ion-label>
+      <ion-select [(ngModel)]=searchterms.specialtyId [disabled]="!searchterms.payorId || !searchterms.orgId" (ngModelChange)="searchDoctors()">
         <ion-option *ngFor="let specialty of specialties" [value]="specialty.id">{{ specialty.name }}</ion-option>
       </ion-select>
     </ion-item>
@@ -55,36 +71,18 @@
   
   <ion-list>
     <ion-item>
-      <ion-label>Visit type</ion-label>
-      <ion-select [(ngModel)]=searchterms.specialtyId [disabled]="!searchterms.payorId">
+      <ion-label [color]="searchterms.visitType ? 'sk' : ''">Visit type</ion-label>
+      <ion-select [(ngModel)]=searchterms.visitType [disabled]="!searchterms.payorId || !searchterms.orgId">
         <ion-option *ngFor="let visitType of visitTypes" [value]="visitType.id">{{ visitType.name }}</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>
 
   <ion-item>
-    <ion-label>Date</ion-label>
+    <ion-label [color]="searchterms.date ? 'sk' : ''">Date</ion-label>
       <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="searchterms.date"></ion-datetime>
   </ion-item>
 
-  <button ion-button block [disabled]="!searchterms.payorId" (click)="searchFreeSlots()">Search</button>
-
-
-  <ion-list>
-    <button ion-item *ngFor="let freeslot of freeslots" (click)="itemSelected(freeslot)">
-      {{ freeslot.date }} | {{ freeslot.hour }}
-    </button>
-  </ion-list>
-
-  <pre>
-
-     {{ freeslots }}
-  
-    {{ searchterms | json }}
-
-    
-  
-  </pre>
-  
+  <button ion-button block color="sk" [disabled]="!searchterms.payorId || !searchterms.orgId" (click)="goToFreeSlots(searchterms)">Search</button>
 
 </ion-content>
