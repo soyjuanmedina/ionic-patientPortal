@@ -1,11 +1,28 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="sk">
     <ion-title>Login</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <h1>Login</h1>
+
+
+  <ion-item>
+    <ion-label color="sk" floating>User</ion-label>
+    <ion-input [(ngModel)]=loginterms.user></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="sk" floating>Password</ion-label>
+    <ion-input type="password" [(ngModel)]=loginterms.password></ion-input>
+  </ion-item>
+
+
+  <button ion-button block color="sk" (click)="goLogin(loginterms)">Login</button>
+
+  <pre>
+     {{loginterms | json}}
+  </pre>
 
 </ion-content>

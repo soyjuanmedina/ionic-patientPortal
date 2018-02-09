@@ -14,8 +14,13 @@ export class DatabaseService {
 
     return this.httpClient.get(url, { params: params })
       .map((resp: any) => {
-        this.resource = resp.result;
-        return this.resource;
+        if (resp.METADATA.STATUS == 0){
+          this.resource = resp.result;
+          return this.resource;
+        }else{
+          return resp.METADATA.ERROR_MESSAGE;
+        }
+        
       });
   }
 

@@ -7,22 +7,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
 //Services
-import { DatabaseService } from '../../services/service.database';
+import { DatabaseService, UtilitiesService, UserService} from '../../services/index.services';
 
 //Páginas
 import { FreeslotsComponent } from '../freeslots/freeslots.component';
+import { LoginComponent } from '../login/login.component';
 
-interface Searchterms {
-  hospitalId: string,
-  payorId: string,
-  orgId: string,
-  treatmentId: string,
-  doctorId: string,
-  specialtyId: string,
-  visitTypeId: string,
-  schedule: string,
-  date: string,
-}
+//Interfaces
+import { Searchterms } from '../../interfaces/index.interfaces';
 
 @Component({
   selector: 'app-bookappointments',
@@ -51,9 +43,11 @@ export class BookappointmentsComponent {
 
 
   constructor(public _databaseService: DatabaseService,
-              public alertCtrl: AlertController,
-              public navCtrl: NavController, 
-              public navParams: NavParams) {
+    public alertCtrl: AlertController,
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public _utilitiesService: UtilitiesService,
+    public _userService: UserService) {
 
     this._databaseService.getResource('hospitals').subscribe(response => {
       this.hospitals = response;
@@ -110,10 +104,12 @@ export class BookappointmentsComponent {
   }
 
   searchSpecialties() {
-    var params = {
+    let roughParams = {
       doctorId: this.searchterms.doctorId,
       treatmentId: this.searchterms.treatmentId,
     };
+
+    let params = this._utilitiesService.cleanParams(roughParams);
 
     this._databaseService.getResource('specialties', params).subscribe(response => {
       this.specialties = response;
@@ -143,9 +139,29 @@ export class BookappointmentsComponent {
   }
 
   goToFreeSlots(searchterms:Searchterms){
-    console.log(searchterms);
     this.navCtrl.push(FreeslotsComponent, { searchterms });
+  }
 
+  resetSearchterms(){
+    this.searchterms = {
+    hospitalId: null,
+    payorId: null,
+    orgId: null,
+    treatmentId: null,
+    doctorId: null,
+    specialtyId: null,
+    visitTypeId: null,
+    schedule: null,
+    date: '2018-02-02',
+  };
+}
+
+  goLogin() {
+    this.navCtrl.push(LoginComponent);
+  }
+
+  goLogout() {
+    this._userService.loginUser = false;
   }
 
 }

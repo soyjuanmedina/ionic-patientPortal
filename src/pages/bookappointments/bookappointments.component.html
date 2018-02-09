@@ -2,14 +2,21 @@
   <ion-navbar color="sk">
     <ion-title>Book appointments</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="openModal()">
+      <button ion-button icon-only (click)="goLogin()" *ngIf="!_userService.loginUser">
         <div>
           <ion-icon name='person'></ion-icon>
           <br>
           <label>Login</label>
         </div>
       </button>
-      <button ion-button icon-only (click)="openModal()">
+      <button ion-button icon-only (click)="goLogout()" *ngIf="_userService.loginUser">
+        <div>
+          <ion-icon name='log-out'></ion-icon>
+          <br>
+          <label>Log Out</label>
+        </div>
+      </button>
+      <button ion-button icon-only (click)="goLogin()" *ngIf="!_userService.loginUser">
         <div>
           <ion-icon name='create'></ion-icon>
           <br>
@@ -84,5 +91,6 @@
   </ion-item>
 
   <button ion-button block color="sk" [disabled]="!searchterms.payorId || !searchterms.orgId" (click)="goToFreeSlots(searchterms)">Search</button>
+  <button ion-button block color="sk" (click)="resetSearchterms()">Reset</button>
 
 </ion-content>

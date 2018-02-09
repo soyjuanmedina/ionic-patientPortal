@@ -9,12 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 // Services
-import { DatabaseService } from '../services/service.database';
+import { DatabaseService, UserService, UtilitiesService } from '../services/index.services';
 
 // Componentes
 import { BookappointmentsComponent } from '../pages/bookappointments/bookappointments.component';
 import { LoginComponent } from '../pages/login/login.component';
 import { FreeslotsComponent } from '../pages/freeslots/freeslots.component';
+import { MyappointmentsPage } from '../pages/myappointments/myappointments';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,7 +26,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TabsPage,
     BookappointmentsComponent,
     LoginComponent,
-    FreeslotsComponent
+    FreeslotsComponent,
+    MyappointmentsPage
   ],
   imports: [
     BrowserModule,
@@ -39,12 +41,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TabsPage,
     BookappointmentsComponent,
     LoginComponent,
-    FreeslotsComponent
+    FreeslotsComponent,
+    MyappointmentsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     DatabaseService,
+    UserService,
+    UtilitiesService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

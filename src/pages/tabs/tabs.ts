@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 
 import { BookappointmentsComponent } from '../bookappointments/bookappointments.component';
-import { LoginComponent } from '../login/login.component';
+import { MyappointmentsPage } from '../myappointments/myappointments';
+
+//Services
+import { UserService } from '../../services/index.services';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -9,9 +12,20 @@ import { LoginComponent } from '../login/login.component';
 export class TabsPage {
 
   tab1Root = BookappointmentsComponent;
-  tab2Root = LoginComponent;
+  tab2Root = MyappointmentsPage;
 
-  constructor() {
+  user = false;
 
+  constructor(public _userService: UserService) {
+    console.log("Dentro de consturctor");
   }
+
+  ngOnInit() {
+  }
+
+  ionViewDidLoad() {
+    console.log("Dentro de ionViewDidLoad");
+  }
+
+
 }

@@ -1,4 +1,4 @@
 <ion-tabs color="sk">
   <ion-tab [root]="tab1Root" tabTitle="Book appointments" tabIcon="medkit"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Login" tabIcon="person"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="My appointments" tabIcon="list" *ngIf="_userService.loginUser"></ion-tab>
 </ion-tabs>
